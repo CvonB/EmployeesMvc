@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using System.Xml.Serialization;
 
 namespace EmployeesMvc.Models
 {
@@ -21,22 +20,12 @@ namespace EmployeesMvc.Models
             }
             employees.Add(employee);
             SaveToFile();
-            ExportToXml();
         }
 
         public void SaveToFile()
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
             File.WriteAllText("employees.json", JsonSerializer.Serialize(employees, options));
-        }
-
-        public void ExportToXml()
-        {
-            var serializer = new XmlSerializer(typeof(List<Employee>));
-            using (var writer = new StreamWriter("employees.xml"))
-            {
-                serializer.Serialize(writer, employees);
-            }
         }
 
         public void LoadFromFile()
