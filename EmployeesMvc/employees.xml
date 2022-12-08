@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfEmployee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Employee>
+    <Id>0</Id>
+    <Name>Christian</Name>
+    <Email>cvb.jaf@gmail.com</Email>
+  </Employee>
+  <Employee>
+    <Id>1</Id>
+    <Name>Håkan</Name>
+    <Email>Hak@n.se</Email>
+  </Employee>
+  <Employee>
+    <Id>2</Id>
+    <Name>Niklas</Name>
+    <Email>niklas@montusinvest.se</Email>
+  </Employee>
+</ArrayOfEmployee>

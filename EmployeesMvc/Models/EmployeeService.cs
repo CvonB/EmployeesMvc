@@ -31,6 +31,15 @@ namespace EmployeesMvc.Models
             File.WriteAllText("employees.json", JsonSerializer.Serialize(employees, options));
         }
 
+        public void ExportToXml()
+        {
+            var serializer = new XmlSerializer(typeof(List<Employee>));
+            using (var writer = new StreamWriter("employees.xml"))
+            {
+                serializer.Serialize(writer, employees);
+            }
+        }
+
         public void LoadFromFile()
         {
             if (File.Exists("employees.json"))
