@@ -1,9 +1,20 @@
-﻿using System.Text.Json;
-using System.Xml.Linq;
+﻿using System.Text;
+using System.Text.Json;
 using System.Xml.Serialization;
 
 namespace EmployeesMvc.Models
 {
+
+
+    public class StringWriterUTF8 : StringWriter
+    {
+        public override Encoding Encoding
+        {
+            get { return Encoding.UTF8; }
+        }
+    }
+
+
     public class EmployeeService
     {
         static List<Employee> employees = new List<Employee>
@@ -31,14 +42,14 @@ namespace EmployeesMvc.Models
             File.WriteAllText("employees.json", JsonSerializer.Serialize(employees, options));
         }
 
-        public void ExportToXml()
-        {
-            var serializer = new XmlSerializer(typeof(List<Employee>));
-            using (var writer = new StreamWriter("employees.xml"))
-            {
-                serializer.Serialize(writer, employees);
-            }
-        }
+        //public void ExportToXml()
+        //{
+        //    var serializer = new XmlSerializer(typeof(List<Employee>));
+        //    using (var writer = new StreamWriter("employees.xml"))
+        //    {
+        //        serializer.Serialize(writer, employees);
+        //    }
+        //}
 
         public void LoadFromFile()
         {
@@ -53,7 +64,7 @@ namespace EmployeesMvc.Models
         public void SaveXML()
         {
             var serializer = new XmlSerializer(typeof(List<Employee>), new XmlRootAttribute("Employees"));
-            using (var stream = new StringWriter())
+            using (var stream = new StringWriterUTF8())
             {
                 serializer.Serialize(stream, employees);
                 File.WriteAllText("employees.xml", stream.ToString());
