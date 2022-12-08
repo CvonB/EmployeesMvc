@@ -1,4 +1,5 @@
-﻿@using EmployeesMvc.Models
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using EmployeesMvc.Models
 @model Employee[]
 
 <!DOCTYPE html>
@@ -13,7 +14,7 @@
     <ul>
         @foreach (var employee in Model)
         {
-            <li><a href="/details/@employee.Id">@employee.Name</a></li>
+            <li><a  asp-action="Details" asp-route-id="Id">@employee.Name</a></li>
         }
     </ul>
 </body>
