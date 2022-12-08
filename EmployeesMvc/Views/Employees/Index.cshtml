@@ -10,7 +10,7 @@
 </head>
 <body>
     <h1>Index</h1>
-    <button onClick="location.href='/create'">Create</button>
+    <form asp-controller="employees" asp-action="create" method="get"><input type="submit" value="Add employee" /></form>
     <ul>
         @foreach (var employee in Model)
         {

@@ -12,7 +12,7 @@ namespace EmployeesMvc.Controllers
             service= new EmployeeService();
         }
 
-        [HttpGet(""),HttpGet("index")]
+        [HttpGet(""),HttpGet(nameof(Index))]
         public IActionResult Index()
         {
             service.LoadXML();
