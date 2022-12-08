@@ -1,4 +1,6 @@
 ﻿using System.Text.Json;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace EmployeesMvc.Models
 {
@@ -15,11 +17,12 @@ namespace EmployeesMvc.Models
         {
             if (employees.Count != 0)
             {
-            employee.Id = employees.Max(o => o.Id) + 1;
+                employee.Id = employees.Max(o => o.Id) + 1;
 
             }
             employees.Add(employee);
             SaveToFile();
+            SaveXML();
         }
 
         public void SaveToFile()
@@ -35,6 +38,28 @@ namespace EmployeesMvc.Models
                 var json = File.ReadAllText("employees.json");
                 employees = JsonSerializer.Deserialize<List<Employee>>(json);
 
+            }
+        }
+
+        public void SaveXML()
+        {
+            var serializer = new XmlSerializer(typeof(List<Employee>), new XmlRootAttribute("Employees"));
+            using (var stream = new StringWriter())
+            {
+                serializer.Serialize(stream, employees);
+                File.WriteAllText("employees.xml", stream.ToString());
+            }
+        }
+
+        public void LoadXML()
+        {
+            var serializer = new XmlSerializer(typeof(List<Employee>), new XmlRootAttribute("Employees"));
+            if (File.Exists("employees.xml"))
+            {
+                using (var stream = new FileStream("employees.xml", FileMode.Open))
+                {
+                    employees = (List<Employee>)serializer.Deserialize(stream);
+                }
             }
         }
 

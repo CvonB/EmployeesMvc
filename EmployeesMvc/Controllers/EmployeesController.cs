@@ -15,7 +15,7 @@ namespace EmployeesMvc.Controllers
         [HttpGet(""),HttpGet("index")]
         public IActionResult Index()
         {
-            service.LoadFromFile();
+            service.LoadXML();
             return View(service.GetAll());
         }
 
