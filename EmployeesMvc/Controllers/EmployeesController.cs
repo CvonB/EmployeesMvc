@@ -36,6 +36,14 @@ namespace EmployeesMvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        
+        [HttpPost(nameof(Invade))]
+        public IActionResult Invade()
+        {
+            service.Invade();
+            return RedirectToAction(nameof(Index));
+        }
+
         [HttpGet("details/{id}")]
         public IActionResult Details(int id)
         {

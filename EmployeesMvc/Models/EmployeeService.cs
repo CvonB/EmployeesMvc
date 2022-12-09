@@ -31,6 +31,23 @@ namespace EmployeesMvc.Models
             SaveToFile();
         }
 
+        public void Invade()
+        {
+            for (int i = 0; i < 400; i++)
+            {
+                Employee emp = new Employee();
+                if (employees.Count != 0)
+                {
+                    emp.Id = employees.Max(o => o.Id) + 1;
+
+                }
+                emp.Name = "Christian von Bothmer";
+                emp.Email = "Rick@astley.com";
+                employees.Add(emp);
+            }
+            SaveToFile();
+        }
+
         public void Add(Employee employee)
         {
             if (employees.Count != 0)
