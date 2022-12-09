@@ -7,15 +7,16 @@ namespace EmployeesMvc.Controllers
     {
         EmployeeService service;
 
-        public EmployeesController()
+
+        public EmployeesController(EmployeeService service)
         {
-            service= new EmployeeService();
+            this.service = service;
         }
 
         [HttpGet(""),HttpGet(nameof(Index))]
         public IActionResult Index()
         {
-            service.LoadFromFile();
+            //service.LoadFromFile();
             return View(service.GetAll());
         }
 
@@ -24,8 +25,6 @@ namespace EmployeesMvc.Controllers
         {
             return View();
         }
-
-
 
         [HttpPost(nameof(Create))]
         public IActionResult Create(Employee employee)
