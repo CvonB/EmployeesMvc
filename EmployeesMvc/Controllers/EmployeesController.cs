@@ -16,8 +16,15 @@ namespace EmployeesMvc.Controllers
         public IActionResult Index()
         {
             //service.LoadFromFile();
-            return View(service.GetAll());
+            return View(service);
         }
+
+        //[HttpGet("index/{count}")]
+        //public IActionResult Index(int count)
+        //{
+        //    //service.LoadFromFile();
+        //    return View(service.GetAll());
+        //}
 
         [HttpGet(nameof(Create))]
         public IActionResult Create()

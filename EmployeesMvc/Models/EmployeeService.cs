@@ -17,10 +17,12 @@
         };
 
 
+        public int KillCount { get; set; }
 
         public void Kill(Employee employee)
         {
             var tmp = employees.FirstOrDefault(x => x.Id == employee.Id);
+            KillCount++;
             employees.Remove(tmp);
         }
 
@@ -46,6 +48,7 @@
             for (int i = employees.Count - 1; i >= 0; i--)
             {
                 employees.Remove(employees[i]);
+                KillCount++;
 
             }
         }

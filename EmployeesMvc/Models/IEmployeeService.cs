@@ -2,6 +2,9 @@
 {
     public interface IEmployeeService
     {
+
+        int KillCount { get; set; }
+
         void Add(Employee employee);
         void Kill(Employee id);
         void Genocide();

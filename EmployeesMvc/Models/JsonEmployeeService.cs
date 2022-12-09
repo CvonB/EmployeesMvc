@@ -23,6 +23,7 @@ namespace EmployeesMvc.Models
         public void Kill(Employee employee)
         {
             var tmp = employees.FirstOrDefault(x => x.Id == employee.Id);
+            KillCount++;
             employees.Remove(tmp);
         }
 
@@ -45,11 +46,13 @@ namespace EmployeesMvc.Models
 
         }
 
+        public int KillCount { get; set; }
         public void Genocide()
         {
             for (int i = employees.Count - 1; i >= 0; i--)
             {
                 employees.Remove(employees[i]);
+                KillCount++;
 
             }
             SaveToFile();
