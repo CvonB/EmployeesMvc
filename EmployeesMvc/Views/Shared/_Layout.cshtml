@@ -8,16 +8,15 @@
     <title>Employees</title>
 </head>
 <body>
-    <h1>Company AB</h1>
-    <a href="/create">Create</a>
-    <a href="/index">Index</a>
-    <br/>
-    <br/>
-    <br/>
-    @RenderBody()
-    <footer >Copyright by Joel</footer>
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.min.js"></script>​
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.2/jquery.validate.min.js"></script>​
-    <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>​
+    <partial name="_TimeBox" model="Model" />
+<h1>Company AB</h1>
+<a href="/create">Create</a>
+<a href="/index">Index</a>
+<br/>
+<br/>
+<br/>
+@RenderBody()
+<footer >Copyright by Joel</footer>
+@RenderSection("endOfBody", required: false)
 </body>
 </html>
