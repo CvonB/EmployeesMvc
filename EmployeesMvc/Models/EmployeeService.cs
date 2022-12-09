@@ -1,30 +1,27 @@
-﻿using System.Text;
-using System.Text.Json;
-using System.Xml.Serialization;
-
-namespace EmployeesMvc.Models
+﻿namespace EmployeesMvc.Models
 {
 
 
-    
-    public class EmployeeService
+
+    public class EmployeeService : IEmployeeService
     {
-        public List<Employee> employees = new List<Employee>
+        public EmployeeService()
+        {
+        }
+
+        private List<Employee> employees = new List<Employee>
         {
             new Employee{Id=1,Name="Eddy Binen",Email="Eddy@binen.com"},
             //new Employee{Id=2,Name="Christian von Bothmer",Email="Christian@von.bothmer"},
             new Employee{Id=3,Name="Niklas Lindfors",Email="Niklas@lindfors.se"}
         };
 
-        public EmployeeService()
-        {
-        }
+
 
         public void Kill(Employee employee)
         {
-            var tmp = employees.FirstOrDefault(x => x.Id== employee.Id);
+            var tmp = employees.FirstOrDefault(x => x.Id == employee.Id);
             employees.Remove(tmp);
-
         }
 
         public void Invade()
@@ -46,7 +43,7 @@ namespace EmployeesMvc.Models
 
         public void Genocide()
         {
-            for (int i = employees.Count-1; i >= 0; i--)
+            for (int i = employees.Count - 1; i >= 0; i--)
             {
                 employees.Remove(employees[i]);
 
@@ -73,4 +70,5 @@ namespace EmployeesMvc.Models
             return employees.FirstOrDefault(o => o.Id == id);
         }
     }
+
 }

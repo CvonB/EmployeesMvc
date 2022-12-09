@@ -5,14 +5,12 @@ namespace EmployeesMvc.Controllers
 {
     public class EmployeesController : Controller
     {
-        EmployeeService service;
-
-
-
-        public EmployeesController(EmployeeService service)
+        IEmployeeService service;
+        public EmployeesController(IEmployeeService service)
         {
             this.service = service;
         }
+
 
         [HttpGet(""),HttpGet(nameof(Index))]
         public IActionResult Index()
