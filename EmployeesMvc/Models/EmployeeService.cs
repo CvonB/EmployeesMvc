@@ -33,7 +33,7 @@ namespace EmployeesMvc.Models
             }
             employees.Add(employee);
             SaveToFile();
-            SaveXML();
+            //SaveXML();
         }
 
         public void SaveToFile()
@@ -42,14 +42,6 @@ namespace EmployeesMvc.Models
             File.WriteAllText("employees.json", JsonSerializer.Serialize(employees, options));
         }
 
-        //public void ExportToXml()
-        //{
-        //    var serializer = new XmlSerializer(typeof(List<Employee>));
-        //    using (var writer = new StreamWriter("employees.xml"))
-        //    {
-        //        serializer.Serialize(writer, employees);
-        //    }
-        //}
 
         public void LoadFromFile()
         {
