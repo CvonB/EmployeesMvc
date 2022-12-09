@@ -3,7 +3,7 @@ using EmployeesMvc.Models;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 //builder.Services.AddTransient<EmployeeService>();
-builder.Services.AddSingleton<EmployeeService>();
+builder.Services.AddSingleton<EmployeeService,JsonEmployeeService>();
 var app = builder.Build();
 
 app.UseRouting();
