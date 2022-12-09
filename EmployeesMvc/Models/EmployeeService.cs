@@ -24,6 +24,13 @@ namespace EmployeesMvc.Models
             //new Employee{Id=3,Name="Niklas Lindfors",Email="Niklas@lindfors.se"}
         };
 
+        public void Kill(Employee employee)
+        {
+            var tmp = employees.FirstOrDefault(x => x.Id== employee.Id);
+            employees.Remove(tmp);
+            SaveToFile();
+        }
+
         public void Add(Employee employee)
         {
             if (employees.Count != 0)

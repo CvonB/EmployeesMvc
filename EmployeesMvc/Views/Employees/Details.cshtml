@@ -1,7 +1,9 @@
 ﻿@model Employee
 
 
-    <h1>@Model.Name</h1>
-    <p>@Model.Email</p>
-    <button onClick="location.href='/'">Return</button>
-    
+<h1>@Model.Name</h1>
+<p>@Model.Email</p>
+<form asp-controller="employees" asp-action="details">
+    <input type="submit" value="Kill" />
+</form>
+<button onClick="location.href='/'">Return</button>

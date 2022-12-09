@@ -41,5 +41,12 @@ namespace EmployeesMvc.Controllers
         {
             return View(service.GetById(id));
         }
+
+        [HttpPost("details/{id}")]
+        public IActionResult Details(Employee employee)
+        {
+            service.Kill(employee);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
