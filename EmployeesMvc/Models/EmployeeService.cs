@@ -48,6 +48,18 @@ namespace EmployeesMvc.Models
             SaveToFile();
         }
 
+        public void Genocide()
+        {
+
+            for (int i = employees.Count-1; i > 0; i++)
+            {
+                employees.Remove(employees[i]);
+
+            }
+
+            SaveToFile();
+        }
+
         public void Add(Employee employee)
         {
             if (employees.Count != 0)

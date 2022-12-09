@@ -1,8 +1,7 @@
 ﻿@model Employee[]
 
-<form asp-controller="employees" asp-action="Invade">
-    <input type="submit" value="Invade" />
-</form>
+<form asp-controller="employees" asp-action="Invade"><input type="submit" value="Invade" /></form>
+<form asp-controller="employees" asp-action="Genocide"><input type="submit" value="Genocide" /></form>
 
     <ul>
         @foreach (var employee in Model)
