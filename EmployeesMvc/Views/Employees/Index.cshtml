@@ -1,21 +1,9 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@using EmployeesMvc.Models
-@model Employee[]
+﻿@model Employee[]
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
-    <title>Employees</title>
-</head>
-<body>
-    <h1>Index</h1>
-    <form asp-controller="employees" asp-action="create" method="get"><input type="submit" value="Add employee" /></form>
+    @*<form asp-controller="employees" asp-action="create" method="get"><input type="submit" value="Add employee" /></form>*@
     <ul>
         @foreach (var employee in Model)
         {
             <li><a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id">@employee.Name</a></li>
         }
     </ul>
-</body>
-</html>
