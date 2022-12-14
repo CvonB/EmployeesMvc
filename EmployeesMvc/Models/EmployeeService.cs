@@ -9,12 +9,7 @@ namespace EmployeesMvc.Models
         {
                 this.context = context;
         }
-
         private readonly EmployeesContext context;
-
-
-        
-
 
         public int KillCount { get; set; }
 
@@ -47,5 +42,4 @@ namespace EmployeesMvc.Models
             return context.Employees.FirstOrDefault(o => o.Id == id);
         }
     }
-
 }

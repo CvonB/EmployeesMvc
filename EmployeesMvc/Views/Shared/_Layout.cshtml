@@ -2,18 +2,25 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Employees</title>
 </head>
 <body>
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:20%;top:0%;">
+        <h3 class="w3-bar-item">Navigation</h3>
+        <a href="/create" class="w3-bar-item w3-button">Create</a>
+        <a href="/index" class="w3-bar-item w3-button">Index</a>
+    <div style="bottom:1%; position:absolute; margin-left:10%;">
+    <footer >Copyright by Vi</footer>
+        </div>
+</div>
+<div class="content" style="margin-left:25%">
     <partial name="_TimeBox" model="Model" />
-<h1>Company AB</h1>
-<a href="/create">Create</a>
-<a href="/index">Index</a>
-<br/>
-<br/>
-<br/>
-@RenderBody()
-<footer >Copyright by Joel</footer>
-@RenderSection("endOfBody", required: false)
+    <h1 style="font-style:italic">Company AB</h1>
+    <br/>
+
+    @RenderBody()
+    @RenderSection("endOfBody", required: false)
+</div>
 </body>
 </html>
