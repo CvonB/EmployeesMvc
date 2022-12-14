@@ -1,0 +1,15 @@
+﻿@model Company[]
+
+<button onclick="location.href='/AddCompany'" type="button">
+    Lägg Till
+</button>
+    <br/>
+    <br/>
+    <ul>
+    @foreach (var company in Model)
+    {
+        <li><a asp-controller="employees" asp-action="company" asp-route-id="@company.Id">@company.Name</a></li>
+    }
+    </ul>
+
+

@@ -7,24 +7,32 @@ namespace EmployeesMvc.Controllers
     public class EmployeesController : Controller
     {
         EmployeeService service;
+
         public EmployeesController(EmployeeService service)
         {
             this.service = service;
+
         }
 
+        public static int ID { get; set; } = 1;
+        public static Company CurrentCompany { get; set; }
 
-        [HttpGet(""),HttpGet(nameof(Index))]
+
+
+        [HttpGet(""), HttpGet($"{nameof(Index)}")]
         public async Task<IActionResult> Index()
         {
             //service.LoadFromFile();
-            var model = await service.GetAll();
+            CurrentCompany = await service.GetCompanyById(ID);
+            var model = await service.GetAllEmployees(ID);
             return View(model);
         }
 
 
         [HttpGet(nameof(Create))]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            //var model = await service.GetEmployeeByCompany(ID);
             return View();
         }
 
@@ -33,9 +41,44 @@ namespace EmployeesMvc.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
+            employee.CompanyId= ID;
             await service.Add(employee);
             return RedirectToAction(nameof(Index));
         }
+
+
+        [HttpGet(nameof(AddCompany))]
+        public async Task<IActionResult> AddCompany()
+        {
+            return View();
+        }
+
+        [HttpPost(nameof(AddCompany))]
+        public async Task<IActionResult> AddCompany(Company company)
+        {
+            if (!ModelState.IsValid)
+                return View();
+            await service.AddCompany(company);
+            ID = company.Id;
+            return RedirectToAction(nameof(Create));
+        }
+
+        [HttpGet(nameof(Company))]
+        public async Task<IActionResult> Company()
+        {
+            var model = await service.GetAllCompanies();
+            return View(model);
+        }
+
+        [HttpGet(nameof(Company) + "/{id}")]
+        public async Task<IActionResult> Company(int id)
+        {
+            if (!ModelState.IsValid)
+                return View();
+            ID = id;
+            return RedirectToAction(nameof(Index));
+        }
+
 
        
 

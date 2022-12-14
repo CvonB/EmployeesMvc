@@ -3,15 +3,11 @@ using System.Collections.Generic;
 
 namespace EmployeesMvc.Models.Entities;
 
-public partial class Employee
+public partial class Company
 {
     public int Id { get; set; }
 
     public string Name { get; set; } = null!;
 
-    public string? Email { get; set; }
-
-    public int? CompanyId { get; set; }
-
-    public virtual Company? Company { get; set; }
+    public virtual ICollection<Employee> Employees { get; } = new List<Employee>();
 }
