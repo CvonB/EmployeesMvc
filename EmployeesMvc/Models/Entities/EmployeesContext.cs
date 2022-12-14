@@ -19,7 +19,7 @@ public partial class EmployeesContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Employee__3214EC074F2CE804");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+
             entity.Property(e => e.Email).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(50);
         });
