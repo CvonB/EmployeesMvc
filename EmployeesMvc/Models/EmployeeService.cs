@@ -1,76 +1,50 @@
-﻿namespace EmployeesMvc.Models
+﻿using EmployeesMvc.Models.Entities;
+
+namespace EmployeesMvc.Models
 {
 
-
-
-    public class EmployeeService : IEmployeeService
+    public class EmployeeService 
     {
-        public EmployeeService()
+        public EmployeeService(EmployeesContext context)
         {
+                this.context = context;
         }
 
-        private List<Employee> employees = new List<Employee>
-        {
-            new Employee{Id=1,Name="Eddy Binen",Email="Eddy@binen.com"},
-            //new Employee{Id=2,Name="Christian von Bothmer",Email="Christian@von.bothmer"},
-            new Employee{Id=3,Name="Niklas Lindfors",Email="Niklas@lindfors.se"}
-        };
+        private readonly EmployeesContext context;
+
+
+        
 
 
         public int KillCount { get; set; }
 
-        public void Kill(Employee employee)
+        public async Task Kill(Employee employee)
         {
-            var tmp = employees.FirstOrDefault(x => x.Id == employee.Id);
+            var tmp = context.Employees.FirstOrDefault(x => x.Id == employee.Id);
             KillCount++;
-            employees.Remove(tmp);
+            context.Employees.Remove(tmp);
+            await context.SaveChangesAsync();
         }
 
-        public void Invade()
+        public async Task Add(Employee employee)
         {
-            for (int i = 0; i < 400; i++)
-            {
-                Employee emp = new Employee();
-                if (employees.Count != 0)
-                {
-                    emp.Id = employees.Max(o => o.Id) + 1;
-
-                }
-                emp.Name = "Christian von Bothmer";
-                emp.Email = "Rick@astley.com";
-                employees.Add(emp);
-            }
-
+            context.Employees.Add(employee);
+            await context.SaveChangesAsync();
         }
 
-        public void Genocide()
+        public async Task<Employee[]> GetAll()
         {
-            for (int i = employees.Count - 1; i >= 0; i--)
-            {
-                employees.Remove(employees[i]);
-                KillCount++;
+            await Task.Delay(0);
 
-            }
+            return context.Employees
+                .OrderBy(o => o.Name)
+                .ToArray();
         }
 
-        public void Add(Employee employee)
+        public async Task<Employee> GetById(int id)
         {
-            if (employees.Count != 0)
-            {
-                employee.Id = employees.Max(o => o.Id) + 1;
-
-            }
-            employees.Add(employee);
-        }
-
-        public Employee[] GetAll()
-        {
-            return employees.ToArray();
-        }
-
-        public Employee GetById(int id)
-        {
-            return employees.FirstOrDefault(o => o.Id == id);
+            await Task.Delay(0);
+            return context.Employees.FirstOrDefault(o => o.Id == id);
         }
     }
 

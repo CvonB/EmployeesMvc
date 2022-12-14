@@ -1,30 +1,26 @@
 ﻿using EmployeesMvc.Models;
 using Microsoft.AspNetCore.Mvc;
+using EmployeesMvc.Models.Entities;
 
 namespace EmployeesMvc.Controllers
 {
     public class EmployeesController : Controller
     {
-        IEmployeeService service;
-        public EmployeesController(IEmployeeService service)
+        EmployeeService service;
+        public EmployeesController(EmployeeService service)
         {
             this.service = service;
         }
 
 
         [HttpGet(""),HttpGet(nameof(Index))]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             //service.LoadFromFile();
-            return View(service);
+            var model = await service.GetAll();
+            return View(model);
         }
 
-        //[HttpGet("index/{count}")]
-        //public IActionResult Index(int count)
-        //{
-        //    //service.LoadFromFile();
-        //    return View(service.GetAll());
-        //}
 
         [HttpGet(nameof(Create))]
         public IActionResult Create()
@@ -33,33 +29,21 @@ namespace EmployeesMvc.Controllers
         }
 
         [HttpPost(nameof(Create))]
-        public IActionResult Create(Employee employee)
+        public async Task<IActionResult> Create(Employee employee)
         {
             if (!ModelState.IsValid)
                 return View();
-            service.Add(employee);
+            await service.Add(employee);
             return RedirectToAction(nameof(Index));
         }
 
-        
-        [HttpPost(nameof(Invade))]
-        public IActionResult Invade()
-        {
-            service.Invade();
-            return RedirectToAction(nameof(Index));
-        }
-
-        [HttpPost(nameof(Genocide))]
-        public IActionResult Genocide()
-        {
-            service.Genocide();
-            return RedirectToAction(nameof(Index));
-        }
+       
 
         [HttpGet("details/{id}")]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            return View(service.GetById(id));
+            var model = await service.GetById(id);
+            return View(model);
         }
 
         [HttpPost("details/{id}")]
