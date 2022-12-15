@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string company = "";
+    if (EmployeesMvc.Controllers.EmployeesController.CurrentCompany != null)
+        company = @EmployeesMvc.Controllers.EmployeesController.CurrentCompany.Name;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
@@ -7,7 +13,7 @@
 </head>
 <body>
     <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:20%;top:0%;">
-        <h3 class="w3-bar-item">hi</h3>
+        <h3 class="w3-bar-item">@company</h3>
         <a href="/index" class="w3-bar-item w3-button">Anställda</a>
         <a href="/create" class="w3-bar-item w3-button">Lägg till</a>
             <a style="bottom:5%; position:absolute" href="/company" class="w3-bar-item w3-button">Byt bolag</a>
@@ -25,4 +31,3 @@
 </body>
 </html>
 
-@*@EmployeesMvc.Controllers.EmployeesController.CurrentCompany.Name*@

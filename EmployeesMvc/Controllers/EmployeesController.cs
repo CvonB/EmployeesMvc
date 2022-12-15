@@ -15,7 +15,7 @@ namespace EmployeesMvc.Controllers
 
         }
 
-        public static int ID { get; set; } = 1;
+        public static int ID { get; set; }
         public static Company CurrentCompany { get; set; } = new Company();
 
 
@@ -24,6 +24,10 @@ namespace EmployeesMvc.Controllers
         public async Task<IActionResult> Index()
         {
             CurrentCompany = await service.GetCompanyById(ID);
+            if (CurrentCompany == null)
+            {
+                return RedirectToAction(nameof(Company));
+            }
             var model = await service.GetAllEmployees(ID);
             return View(model);
         }
@@ -35,32 +39,35 @@ namespace EmployeesMvc.Controllers
             return View();
         }
 
-        [HttpGet(nameof(Create) + "/{id}")]
-        public async Task<IActionResult> Create(int id)
-        {
-            var tmp = await service.GetById(id);
-            CreateVM employee = new CreateVM { CompanyId = tmp.CompanyId, Email=tmp.Email,Name=tmp.Name};
-            return View(employee);
-        }
 
         [HttpPost(nameof(Create))]
         public async Task<IActionResult> Create(CreateVM employee)
         {
             if (!ModelState.IsValid)
                 return View();
-            if (service.GetById(employee.Id) == null)
-            {
                 employee.CompanyId= ID;
-                await service.Add(employee);
-            }
-            else
-            {
-                await service.EditEmployee(employee);
-            }
+                await service.Add(employee);            
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet(nameof(Edit) + "/{id}")]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var tmp = await service.GetById(id);
+            CreateVM employee = new CreateVM { CompanyId = tmp.CompanyId, Email=tmp.Email,Name=tmp.Name};
+            return View(employee);
+        }
 
+        [HttpPost(nameof(Edit) + "/{id}")]
+        public async Task<IActionResult> Edit(CreateVM employee)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            await service.EditEmployee(employee);
+
+            return RedirectToAction(nameof(Index));
+        }
 
         [HttpGet(nameof(AddCompany))]
         public async Task<IActionResult> AddCompany()

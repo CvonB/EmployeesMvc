@@ -1,12 +1,14 @@
 ﻿@model IndexVM[]
 
+
 @if (Model.Count() != 0)
 {
             <br/>
         <ul>
         @foreach (var employee in Model)
         {
-                <li><a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id">@employee.Name</a></li>
+            string style = (employee.ShowAsHighlighted == true ? "color:red" : "color:black");
+            <li><a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id" style="@style">@employee.Name</a></li>
         }
         </ul>
 }

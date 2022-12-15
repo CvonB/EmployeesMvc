@@ -1,6 +1,7 @@
 ﻿@model CreateVM
 
-    <form asp-controller="employees" asp-action="create">
+
+    <form asp-controller="employees" asp-action="edit">
         <label asp-for="Name"></label>
         <input asp-for="Name"  />
         <span asp-validation-for="Name"></span>
@@ -16,7 +17,7 @@
         <span asp-validation-for="BotCheck"></span>
         <br/>
         <br/>
-        <input type="submit" value="Anställ"/>
+        <input type="submit" value="Redigera"/>
         @section endOfBody {
             <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.min.js"></script>​
             <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.2/jquery.validate.min.js"></script>​

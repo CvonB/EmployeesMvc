@@ -92,6 +92,7 @@ namespace EmployeesMvc.Models
             var tmp = context.Employees.FirstOrDefault(o => o.Id == employee.Id);
             tmp.Name = employee.Name;
             tmp.Email = employee.Email;
+            await context.SaveChangesAsync();
         }
 
         internal async Task AddCompany(Company company)

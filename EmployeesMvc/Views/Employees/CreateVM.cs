@@ -6,6 +6,7 @@ namespace EmployeesMvc.Views.Employees
     {
         public int Id { get; set; }
         public int CompanyId { get; set; }
+
         [Required]
         public string Name { get; set; }
 
@@ -14,8 +15,8 @@ namespace EmployeesMvc.Views.Employees
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "What is 2 + 2=")]
-        [Range(int.MinValue,int.MaxValue)]
+        [Display(Name = "What is 2 + 2?")]
+        [Range(4, 4)]
         public int BotCheck { get; set; }
     }
 }
