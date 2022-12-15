@@ -1,5 +1,6 @@
 ﻿using EmployeesMvc.Controllers;
 using EmployeesMvc.Models.Entities;
+using EmployeesMvc.Views.Employees;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmployeesMvc.Models
@@ -22,13 +23,24 @@ namespace EmployeesMvc.Models
             await context.SaveChangesAsync();
         }
 
-        public async Task Add(Employee employee)
+        public async Task Remove(int company)
         {
-            context.Employees.Add(employee);
+            var tmp = context.Companies.FirstOrDefault(x => x.Id == company);
+            var employees = context.Employees.Where(x => x.CompanyId == company);
+            context.Employees.RemoveRange(employees);
+            context.Companies.RemoveRange(tmp);
             await context.SaveChangesAsync();
         }
 
-        public async Task<Employee[]> GetAllEmployees(int id)
+        public async Task Add(CreateVM employee)
+        {
+
+            Employee tmp = new Employee { Name= employee.Name, Email = employee.Email, CompanyId = employee.CompanyId };
+            context.Employees.Add(tmp);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task<IndexVM[]> GetAllEmployees(int id)
         {
             await Task.Delay(0);
 
@@ -36,6 +48,12 @@ namespace EmployeesMvc.Models
                 .Include(o => o.Company)
                 .OrderBy(o => o.Name)
                 .Where(o => o.CompanyId == id)
+                .Select(o => new IndexVM
+                {
+                    Email = o.Email,
+                    Name= o.Name,
+                    Id= o.Id,
+                })
                 .ToArray();
         }
 

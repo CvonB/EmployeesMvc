@@ -4,6 +4,6 @@
 <h1>@Model.Name</h1>
 <p>E-Mail: @Model.Email</p>
 <form asp-controller="employees" asp-action="details">
-    <input type="submit" value="Fire" />
+    <input type="submit" value="Sparka" />
 </form>
-@*<button onClick="location.href='/'">Return</button>*@
+<button onClick="location.href='/create/@Model.Id'">Redigera</button>

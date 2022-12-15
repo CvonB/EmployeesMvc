@@ -1,6 +1,7 @@
 ﻿using EmployeesMvc.Models;
 using Microsoft.AspNetCore.Mvc;
 using EmployeesMvc.Models.Entities;
+using EmployeesMvc.Views.Employees;
 
 namespace EmployeesMvc.Controllers
 {
@@ -34,8 +35,16 @@ namespace EmployeesMvc.Controllers
             return View();
         }
 
+        [HttpGet(nameof(Create) + "/{id}")]
+        public async Task<IActionResult> Create(int id)
+        {
+            var tmp = await service.GetById(id);
+            CreateVM employee = new CreateVM { CompanyId = tmp.CompanyId.Value, Email=tmp.Email,Name=tmp.Name};
+            return View(employee);
+        }
+
         [HttpPost(nameof(Create))]
-        public async Task<IActionResult> Create(Employee employee)
+        public async Task<IActionResult> Create(CreateVM employee)
         {
             if (!ModelState.IsValid)
                 return View();
@@ -78,16 +87,22 @@ namespace EmployeesMvc.Controllers
         }
 
 
-       
+        [HttpGet(nameof(RemoveCompany) + "/{id}")]
+        public async Task<IActionResult> RemoveCompany(int id)
+        {
+            await service.Remove(id);
+            return RedirectToAction(nameof(Company));
+        }
 
-        [HttpGet("details/{id}")]
+
+        [HttpGet(nameof(Details) + "/{id}")]
         public async Task<IActionResult> Details(int id)
         {
             var model = await service.GetById(id);
             return View(model);
         }
 
-        [HttpPost("details/{id}")]
+        [HttpPost(nameof(Details) + "/{id}")]
         public async Task<IActionResult> Details(Employee employee)
         {
             await service.Remove(employee);

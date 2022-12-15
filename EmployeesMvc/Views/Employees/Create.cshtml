@@ -1,8 +1,14 @@
-﻿@model Employee
-@*<h1 style="font-style:italic">@Model.Company.Name</h1>*@
+﻿@model CreateVM
+@{
+    string buttonText = "Anställ";
+    if(Model != null)
+        buttonText = "Redigera";
+
+}
+<h1 style="font-style:italic">@EmployeesMvc.Controllers.EmployeesController.CurrentCompany.Name</h1>
     <form asp-controller="employees" asp-action="create">
         <label asp-for="Name"></label>
-        <input asp-for="Name" />
+        <input asp-for="Name"  />
         <span asp-validation-for="Name"></span>
         <br/>
         <br/>
@@ -12,7 +18,7 @@
         <span asp-validation-for="Email"></span>
         <br/>
         <br/>
-        <input type="submit" value="Anställ"/>
+        <input type="submit" value="@buttonText"/>
         @section endOfBody {
             <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.min.js"></script>​
             <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.2/jquery.validate.min.js"></script>​
