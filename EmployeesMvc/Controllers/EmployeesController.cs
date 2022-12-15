@@ -19,7 +19,7 @@ namespace EmployeesMvc.Controllers
         public static int EmployeeCount { get; set; }
         public static Company CurrentCompany { get; set; } = new Company();
 
-
+        public static string CurrentPage { get; set; }
 
         [HttpGet(""), HttpGet($"{nameof(Index)}")]
         public async Task<IActionResult> Index()
@@ -32,6 +32,7 @@ namespace EmployeesMvc.Controllers
 
             var model = await service.GetAllEmployees(ID);
             EmployeeCount = model.Length;
+            CurrentPage = nameof(Index);
             return View(model);
         }
 
@@ -39,6 +40,7 @@ namespace EmployeesMvc.Controllers
         [HttpGet(nameof(Create))]
         public async Task<IActionResult> Create()
         {
+            CurrentPage = nameof(Create);
             return View();
         }
 
@@ -56,6 +58,7 @@ namespace EmployeesMvc.Controllers
         [HttpGet(nameof(Edit) + "/{id}")]
         public async Task<IActionResult> Edit(int id)
         {
+            CurrentPage = nameof(Edit);
             var tmp = await service.GetById(id);
             CreateVM employee = new CreateVM { CompanyId = tmp.CompanyId, Email=tmp.Email,Name=tmp.Name};
             return View(employee);
@@ -75,6 +78,7 @@ namespace EmployeesMvc.Controllers
         [HttpGet(nameof(AddCompany))]
         public async Task<IActionResult> AddCompany()
         {
+            CurrentPage = nameof(AddCompany);
             return View();
         }
 
@@ -91,6 +95,7 @@ namespace EmployeesMvc.Controllers
         [HttpGet(nameof(Company))]
         public async Task<IActionResult> Company()
         {
+            CurrentPage = nameof(Company);
             var model = await service.GetAllCompanies();
             return View(model);
         }
@@ -116,6 +121,7 @@ namespace EmployeesMvc.Controllers
         [HttpGet(nameof(Details) + "/{id}")]
         public async Task<IActionResult> Details(int id)
         {
+            CurrentPage = nameof(Details);
             var model = await service.GetById(id);
             return View(model);
         }

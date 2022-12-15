@@ -5,8 +5,12 @@
 
 
     string employeeCount = "";
-    if (@EmployeesMvc.Controllers.EmployeesController.EmployeeCount != 0)
-    employeeCount = @EmployeesMvc.Controllers.EmployeesController.EmployeeCount.ToString();
+    if (EmployeesMvc.Controllers.EmployeesController.EmployeeCount != 0)
+        employeeCount = EmployeesMvc.Controllers.EmployeesController.EmployeeCount.ToString();
+
+    string currentPage = "";
+    if (EmployeesMvc.Controllers.EmployeesController.CurrentPage != "")
+        currentPage = EmployeesMvc.Controllers.EmployeesController.CurrentPage;
 }
 
 <!DOCTYPE html>
@@ -17,22 +21,30 @@
     <title>Employees</title>
 </head>
 <body>
+    <div class="w3-bar w3-black" style="margin-left:20%; ">
+        <p>
+            <br></br>
+            <span style="font-size:200%; top:2%; left:22%; position:absolute;">
+                @currentPage
+            </span>
+        </p>
+    </div>
     <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:20%;top:0%;">
         <h3 class="w3-bar-item">@company</h3>
-        <a href="/index" class="w3-bar-item w3-button">Anställda <span class="w3-tag w3-black w3-round w3-right">@employeeCount</span></a>
-        <a href="/create" class="w3-bar-item w3-button">Lägg till</a>
-            <a href="/company" class="w3-bar-item w3-button">Byt bolag</a>
-    <div style="bottom:1%; position:absolute; margin-left:10%;">
-    <footer >Copyright by Vi</footer>
+        <a href="/index" class="w3-bar-item w3-button">Anställda <span class="w3-tag w3-black w3-round w3-right" style="width:30px; height:22px">@employeeCount </span></a>
+        <a href="/create" class="w3-bar-item w3-button">Lägg till <span class="w3-tag w3-black w3-round w3-right" style="width:30px; height:22px">+</span></a>
+        <a href="/company" class="w3-bar-item w3-button">Byt bolag <span class="w3-tag w3-black w3-round w3-right" style="width:30px; height:22px">	⟲</span></a>
+        <div style="bottom:1%; position:absolute; margin-left:10%;">
+            <footer>Copyright by Vi</footer>
         </div>
-</div>
-<div class="content" style="margin-left:25%">
+    </div>
+    <div class="content" style="margin-left:25%">
 
-    <br/>
+        <br />
 
-    @RenderBody()
-    @RenderSection("endOfBody", required: false)
-</div>
+        @RenderBody()
+        @RenderSection("endOfBody", required: false)
+    </div>
 </body>
 </html>
 
