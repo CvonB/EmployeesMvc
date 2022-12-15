@@ -2,6 +2,11 @@
     string company = "";
     if (EmployeesMvc.Controllers.EmployeesController.CurrentCompany != null)
         company = @EmployeesMvc.Controllers.EmployeesController.CurrentCompany.Name;
+
+
+    string employeeCount = "";
+    if (@EmployeesMvc.Controllers.EmployeesController.EmployeeCount != 0)
+    employeeCount = @EmployeesMvc.Controllers.EmployeesController.EmployeeCount.ToString();
 }
 
 <!DOCTYPE html>
@@ -14,9 +19,9 @@
 <body>
     <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:20%;top:0%;">
         <h3 class="w3-bar-item">@company</h3>
-        <a href="/index" class="w3-bar-item w3-button">Anställda</a>
+        <a href="/index" class="w3-bar-item w3-button">Anställda <span class="w3-tag w3-black w3-round w3-right">@employeeCount</span></a>
         <a href="/create" class="w3-bar-item w3-button">Lägg till</a>
-            <a style="bottom:5%; position:absolute" href="/company" class="w3-bar-item w3-button">Byt bolag</a>
+            <a href="/company" class="w3-bar-item w3-button">Byt bolag</a>
     <div style="bottom:1%; position:absolute; margin-left:10%;">
     <footer >Copyright by Vi</footer>
         </div>

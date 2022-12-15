@@ -16,6 +16,7 @@ namespace EmployeesMvc.Controllers
         }
 
         public static int ID { get; set; }
+        public static int EmployeeCount { get; set; }
         public static Company CurrentCompany { get; set; } = new Company();
 
 
@@ -28,7 +29,9 @@ namespace EmployeesMvc.Controllers
             {
                 return RedirectToAction(nameof(Company));
             }
+
             var model = await service.GetAllEmployees(ID);
+            EmployeeCount = model.Length;
             return View(model);
         }
 
