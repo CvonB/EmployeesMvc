@@ -22,7 +22,6 @@ namespace EmployeesMvc.Controllers
         [HttpGet(""), HttpGet($"{nameof(Index)}")]
         public async Task<IActionResult> Index()
         {
-            //service.LoadFromFile();
             CurrentCompany = await service.GetCompanyById(ID);
             var model = await service.GetAllEmployees(ID);
             return View(model);
@@ -32,7 +31,6 @@ namespace EmployeesMvc.Controllers
         [HttpGet(nameof(Create))]
         public async Task<IActionResult> Create()
         {
-            //var model = await service.GetEmployeeByCompany(ID);
             return View();
         }
 
@@ -90,9 +88,9 @@ namespace EmployeesMvc.Controllers
         }
 
         [HttpPost("details/{id}")]
-        public IActionResult Details(Employee employee)
+        public async Task<IActionResult> Details(Employee employee)
         {
-            service.Kill(employee);
+            await service.Remove(employee);
             return RedirectToAction(nameof(Index));
         }
     }

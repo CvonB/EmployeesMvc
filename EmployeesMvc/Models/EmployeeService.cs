@@ -15,7 +15,7 @@ namespace EmployeesMvc.Models
 
         public static Company CurrentCompany { get; set; }
 
-        public async Task Kill(Employee employee)
+        public async Task Remove(Employee employee)
         {
             var tmp = context.Employees.FirstOrDefault(x => x.Id == employee.Id);
             context.Employees.Remove(tmp);
