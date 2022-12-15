@@ -4,6 +4,7 @@ namespace EmployeesMvc.Views.Employees
 {
     public class CreateVM
     {
+        public int Id { get; set; }
         public int CompanyId { get; set; }
         [Required]
         public string Name { get; set; }

@@ -66,10 +66,11 @@ namespace EmployeesMvc.Models
                 .ToArray();
         }
 
-        public async Task<Employee> GetById(int id)
+        public async Task<CreateVM> GetById(int id)
         {
             await Task.Delay(0);
-            return context.Employees.FirstOrDefault(o => o.Id == id);
+            var ret = context.Employees.FirstOrDefault(o => o.Id == id);
+            return new CreateVM { Email=ret.Email,Id=ret.Id,Name=ret.Name,CompanyId=ret.CompanyId.Value};
         }
 
         public async Task<Company> GetCompanyById(int id)
@@ -84,6 +85,13 @@ namespace EmployeesMvc.Models
             await Task.Delay(0);
             return context.Employees.Include(o => o.Company).Where(o => o.CompanyId == id).FirstOrDefault();
 
+        }
+
+        public async Task EditEmployee(CreateVM employee)
+        {
+            var tmp = context.Employees.FirstOrDefault(o => o.Id == employee.Id);
+            tmp.Name = employee.Name;
+            tmp.Email = employee.Email;
         }
 
         internal async Task AddCompany(Company company)

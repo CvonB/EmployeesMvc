@@ -16,7 +16,7 @@ namespace EmployeesMvc.Controllers
         }
 
         public static int ID { get; set; } = 1;
-        public static Company CurrentCompany { get; set; }
+        public static Company CurrentCompany { get; set; } = new Company();
 
 
 
@@ -39,7 +39,7 @@ namespace EmployeesMvc.Controllers
         public async Task<IActionResult> Create(int id)
         {
             var tmp = await service.GetById(id);
-            CreateVM employee = new CreateVM { CompanyId = tmp.CompanyId.Value, Email=tmp.Email,Name=tmp.Name};
+            CreateVM employee = new CreateVM { CompanyId = tmp.CompanyId, Email=tmp.Email,Name=tmp.Name};
             return View(employee);
         }
 
@@ -48,10 +48,18 @@ namespace EmployeesMvc.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
-            employee.CompanyId= ID;
-            await service.Add(employee);
+            if (service.GetById(employee.Id) == null)
+            {
+                employee.CompanyId= ID;
+                await service.Add(employee);
+            }
+            else
+            {
+                await service.EditEmployee(employee);
+            }
             return RedirectToAction(nameof(Index));
         }
+
 
 
         [HttpGet(nameof(AddCompany))]
